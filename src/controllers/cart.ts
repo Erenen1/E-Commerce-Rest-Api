@@ -76,16 +76,22 @@ export const postItemToCart = async (req: express.Request, res: express.Response
 }
 
 export const deleteItemFromCart = async (req: express.Request, res: express.Response) => {
-    const { itemId } = req.body;
+    const userId = res.locals.userId
+    const { productId} = req.body;
     try {
-        const item = await CartItem.findOne({ _id: itemId });
+        let cart = await Cart.findOne({userId:userId})
+        if (!cart) {
+            cart = new Cart({ userId: userId });
+            await cart.save();
+        }
+        const item = await CartItem.findOne({ productId:productId, cartId:cart._id });
         if (!item || !item.quantity) {
             return res.status(400).json("Urun yok")
         }
         item.quantity--;
 
         if (item.quantity === 0) {
-            await CartItem.findByIdAndDelete(itemId);
+            await CartItem.findByIdAndDelete(item._id);
         }
         else {
             await item.save();
@@ -100,7 +106,7 @@ export const deleteItemFromCart = async (req: express.Request, res: express.Resp
                 total += sku.price * cartItem.quantity;
             }
         }
-        const cart = await Cart.findOne({ _id: item.cartId });
+        cart = await Cart.findOne({ _id: item.cartId });
         if(cart){
             cart.total = total;
             await cart.save();

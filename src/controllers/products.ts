@@ -1,5 +1,6 @@
 import express from "express";
 import { Product, ProductSku } from "../models/product"
+import { Category } from "models/category";
 
 
 export const getProducts = async (req: express.Request, res: express.Response) => {
@@ -45,11 +46,16 @@ export const getProductForAdmin = async (req: express.Request, res: express.Resp
 
 
 export const postProduct = async (req: express.Request, res: express.Response) => {
-    const { name, description, categoryId, sku, price } = req.body;
+    const { name, description, categoryName, sku, price } = req.body;
     try {
+        const category = await Category.findOne({name:categoryName})
+        if(!category){
+            return res.status(400).json("Bu isimde bir kategori yok.")
+        }
         const newProduct = await new Product({
             name: name,
             description: description,
+            categoryId:category._id
         }).save();
         const product = newProduct.toObject();
 

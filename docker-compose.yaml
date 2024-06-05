@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  node:
+    container_name: node_server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports: 
+      - "3000:3000"
+    networks:
+      - bridge_network
+    environment:
+      - DB_HOST=mongodb://mongo_database/E-Commerce
+      - HASH_SECRET=secret
+      - JWT_SECRET=secret_key
+    
+  mongodb:
+    container_name: mongo_database
+    image: mongo
+    ports:
+      - "60600:27017"
+    networks:
+      - bridge_network
+    volumes:
+      - E_Commerce_Database:/data/db
+
+networks:
+  bridge_network:
+    driver: bridge
+
+volumes:
+  E_Commerce_Database:
+    driver: local

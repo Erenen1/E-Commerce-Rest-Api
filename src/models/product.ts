@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const productsSchema = new Schema({
     name: { type: String, requried: true },
     description: { type: String, required: true },
-    categoryId: { type: Schema.Types.ObjectId, ref: "sub_category" },
+    categoryId: { type: Schema.Types.ObjectId, ref: "category" },
 }, { timestamps: true })
 
 export const Product = mongoose.model("products", productsSchema);
