@@ -22,6 +22,7 @@ import userRoutes from "./routes/user"
 
 import productRoutes from "./routes/product"
 import cartRoutes from "./routes/cart"
+import addressRoutes from "./routes/address"
 import userCategoryRoutes from "./routes/category"
 import wishlistRoutes from "./routes/wishlist"
 
@@ -32,6 +33,7 @@ app.use("/api/admin/users", adminUsersRoutes)
 
 app.use("/api/categories", userCategoryRoutes)
 app.use("/api/products", productRoutes)
+app.use("/api/addresses", addressRoutes)
 app.use("/api/cart", cartRoutes)
 app.use("/api/wishlist", wishlistRoutes)
 

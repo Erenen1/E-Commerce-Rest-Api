@@ -20,7 +20,7 @@ export const postCategory = async (req: express.Request, res: express.Response) 
             description:description
         })
         await category.save()
-        return res.status(200).json("Basariyla kategori olusturuldu.")
+        return res.status(201).json("Basariyla kategori olusturuldu.")
     } catch (error) {
         console.log(error);
         return res.status(400).json();

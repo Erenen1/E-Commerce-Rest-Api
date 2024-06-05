@@ -2,20 +2,19 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
-    address: { type: Schema.Types.ObjectId, ref: "users", required: true },
+    address: { type:String, required: true },
     city: { type: String, required: true },
     region: { type: String, required: true },
     postalCode: { type: String, required: true },
-    countryId: { type: Schema.Types.ObjectId, ref: "country" },
+    //countryId: { type: Schema.Types.ObjectId, ref: "country" },
 }, { timestamps: true })
 
 export const Address = mongoose.model("address", addressSchema);
 
-const countrySchema = new Schema({
-    countryName: { type: String, required: true },
-}, { timestamps: true })
-
-export const Country = mongoose.model("country", countrySchema);
+//const countrySchema = new Schema({
+//    countryName: { type: String, required: true },
+//}, { timestamps: true })
+//export const Country = mongoose.model("country", countrySchema);
 
 
 const userAddressesSchema = new Schema({

@@ -31,7 +31,7 @@ export const postWishToList = async(req: express.Request, res: express.Response)
             userId:userId
         })
         await wish.save()
-        return res.status(200).json("Urun basariyla favori listesine eklendi.");
+        return res.status(201).json("Urun basariyla favori listesine eklendi.");
     } catch (error) {
         console.log(error)
         return res.status(400).json();
