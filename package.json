@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "start:dev": "cross-env node_env=development nodemon"
+    "start:dev": "cross-env NODE_ENV=development nodemon"
   },
   "keywords": [],
   "author": "",

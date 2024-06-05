@@ -17,8 +17,13 @@ import userRoutes from "./routes/user"
 import productRoutes from "./routes/product"
 import adminProductRoutes from "./routes/admin/product"
 import cartRoutes from "./routes/cart"
+import userCategoryRoutes from "./routes/category"
+import adminCategoryRoutes from "./routes/admin/category"
+
 
 app.use("/api/admin/products", adminProductRoutes)
+app.use("/api/admin/categories", adminCategoryRoutes)
+app.use("/api/categories", userCategoryRoutes)
 app.use("/api/admin/users", userRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/cart", cartRoutes)

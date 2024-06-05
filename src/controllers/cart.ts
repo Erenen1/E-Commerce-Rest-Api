@@ -9,11 +9,15 @@ export const getCart = async (req: express.Request, res: express.Response) => {
         if (!userId) {
             return res.status(403).json("Login olunuz")
         }
-        const cart = await Cart.findOne({ userId: userId })
+        let cart = await Cart.findOne({ userId: userId })
         if (!cart) {
-            return res.status(400).json("Sepet bos");
+            cart = new Cart({ userId: userId});
+            await cart.save();
         }
         const items = await CartItem.find({ cartId: cart._id })
+        if(!items){
+            return res.status(400).json("Sepet bos");
+        }
         return res.status(200).json(items);
     } catch (error) {
         console.log(error);

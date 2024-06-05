@@ -31,7 +31,6 @@ export const register = async (req: express.Request, res: express.Response) => {
         if (existingUser) {
             return res.status(409).json("Bu email adresi zaten kayıtlı.")
         }
-        console.log(existingUser);
         const hashedPassword = sha256Hash(password);
         const user = new User({
             name: name,

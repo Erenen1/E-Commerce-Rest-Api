@@ -4,7 +4,7 @@ import { Product, ProductSku } from "../models/product"
 
 export const getProducts = async (req: express.Request, res: express.Response) => {
     try {
-        const products = await Product.find();
+        const products = await ProductSku.find().populate("productId").select("price");
         return res.status(200).json(products);
     } catch (error) {
         console.log(error);
@@ -15,7 +15,7 @@ export const getProducts = async (req: express.Request, res: express.Response) =
 export const getProductDetail = async (req: express.Request, res: express.Response) => {
     const productId = req.params.productId;
     try {
-        const product = await Product.findOne({ _id: productId })
+        const product = await ProductSku.findOne({ productId: productId }).select("price").populate("productId");
         return res.status(200).json(product)
     } catch (error) {
         console.log(error);
