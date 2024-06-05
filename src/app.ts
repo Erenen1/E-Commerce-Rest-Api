@@ -12,24 +12,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(checkJwt);
 
+
+import adminUsersRoutes from "./routes/admin/user"
+import adminProductRoutes from "./routes/admin/product"
+import adminCategoryRoutes from "./routes/admin/category"
+
 import authRoutes from "./routes/auth"
 import userRoutes from "./routes/user"
+
 import productRoutes from "./routes/product"
-import adminProductRoutes from "./routes/admin/product"
 import cartRoutes from "./routes/cart"
 import userCategoryRoutes from "./routes/category"
-import adminCategoryRoutes from "./routes/admin/category"
+import wishlistRoutes from "./routes/wishlist"
 
 
 app.use("/api/admin/products", adminProductRoutes)
 app.use("/api/admin/categories", adminCategoryRoutes)
+app.use("/api/admin/users", adminUsersRoutes)
+
 app.use("/api/categories", userCategoryRoutes)
-app.use("/api/admin/users", userRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/cart", cartRoutes)
+app.use("/api/wishlist", wishlistRoutes)
+
+
+app.use("/profile", userRoutes)
 app.use("/auth", authRoutes)
 
 
 app.listen(3000, () => {
-    console.log("Sunucu http://localhost:3000 üzerinden çalışıyor.")
+    console.log("Sunucu http://localhost:3000 üzerinden calisiyor.")
 })

@@ -6,4 +6,4 @@ const wishlistSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: "users" },
 }, { timestamps: true })
 
-export const Category = mongoose.model("category", wishlistSchema);
+export default mongoose.model("wishlist", wishlistSchema);
