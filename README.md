@@ -65,4 +65,4 @@ Projenin çalıştırılması için aşağıdaki adımları izleyin:
 
 ### Kullanım
 
-Swagger dokümantasyonunu kullanarak API'nin tüm endpoint'lerine erişebilir ve test edebilirsiniz. Uygulama çalıştığında Swagger UI şu adreste mevcut olacaktır:
+Swagger dokümantasyonunu kullanarak API'nin tüm endpoint'lerine erişebilir ve test edebilirsiniz. Uygulama çalıştığında Swagger UI şu adreste mevcut olacaktır: http://localhost:3000/swagger
