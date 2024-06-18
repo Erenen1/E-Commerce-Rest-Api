@@ -1,6 +1,6 @@
 import express from "express";
 import { Product, ProductSku } from "../models/product"
-import { Category } from "models/category";
+import { Category } from "../models/category";
 
 
 export const getProducts = async (req: express.Request, res: express.Response) => {
@@ -26,7 +26,7 @@ export const getProductDetail = async (req: express.Request, res: express.Respon
 
 export const getProductsForAdmin = async (req: express.Request, res: express.Response) => {
     try {
-        const products = await ProductSku.find().populate("productId");
+        const products = await ProductSku.find().populate("productId")
         return res.status(200).json(products);
     } catch (error) {
         console.log(error);

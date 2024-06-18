@@ -26,6 +26,8 @@ import addressRoutes from "./routes/address"
 import userCategoryRoutes from "./routes/category"
 import wishlistRoutes from "./routes/wishlist"
 
+import swaggerUi  from "swagger-ui-express";
+import swaggerDocument from "./swagger.json"
 
 app.use("/api/admin/products", adminProductRoutes)
 app.use("/api/admin/categories", adminCategoryRoutes)
@@ -40,7 +42,7 @@ app.use("/api/wishlist", wishlistRoutes)
 
 app.use("/profile", userRoutes)
 app.use("/auth", authRoutes)
-
+app.use("/swagger",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 app.listen(3000, () => {
     console.log("Sunucu http://localhost:3000 üzerinden calisiyor.")

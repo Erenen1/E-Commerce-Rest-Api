@@ -16,7 +16,7 @@ export const login = async (req: express.Request, res: express.Response) => {
         }
         const jwtToken = createJwtToken(user._id.toString(), user.email, user.isAdmin);
 
-        return res.status(302).setHeader("auhtorization", jwtToken).json("Hesaba başariyla giriş yapildi.")
+        return res.status(302).setHeader("auhtorization", jwtToken).json({token:jwtToken})
     } catch (error) {
         console.log(error)
         return res.sendStatus(400)

@@ -13,13 +13,12 @@ export const getUsers = async(req: express.Request, res: express.Response)=>{
 }
 
 export const getUserDetail = async(req: express.Request, res: express.Response)=>{
-    const {userId }= req.body
-    const authedUserId = res.locals.userId;
-    if(authedUserId !== userId){
-        return res.status(401).json("Unauthorized");
+    const userId = res.locals.userId;
+    if(!userId){
+        return res.status(403).json();
     }
     try {
-        const user = await User.findOne({_id:userId});
+        const user = await User.findOne({_id:userId}).select("name email phoneNumber");
         if(!user){
             return res.status(400).json("Kullanici bulunamadi.");
         }
@@ -43,11 +42,8 @@ export const getUserDetailForAdmin = async(req: express.Request, res: express.Re
     }
 }
 export const updateUser = async(req: express.Request, res: express.Response)=>{
-    const {userId,name,email,password,phoneNumber}= req.body
-    const authedUserId = res.locals.userId;
-    if(authedUserId !== userId){
-        return res.status(401).json("Unauthorized");
-    }
+    const {name,email,password,phoneNumber}= req.body
+    const userId = res.locals.userId;
     try {
         const hashedPassword = sha256Hash(password);
 
@@ -84,11 +80,7 @@ export const updateUserForAdmin = async(req: express.Request, res: express.Respo
 
 
 export const deleteUser = async(req: express.Request, res: express.Response)=>{
-    const {userId }= req.body
-    const authedUserId = res.locals.userId;
-    if(authedUserId !== userId){
-        return res.status(401).json("Unauthorized");
-    }
+    const userId = res.locals.userId;
     try {
         await User.findByIdAndDelete(userId);
         return res.status(200).json("Kullanici silindi.");
